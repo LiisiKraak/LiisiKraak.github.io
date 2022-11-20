@@ -2,31 +2,46 @@
 <html>
   <head>
     <title>Liisi's Mini-project</title>
+    <link rel="icon" type="image/png" href="icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
     <style>
         body{
-            background-color: #FFCCCC;
+            background:linear-gradient(to right, #FFCCCC 0, #FFCCCC 20%, #FFFFFF 20%, #FFFFFF 80%, #FFCCCC 80%, #FFCCCC 100%);
             font-family: 'Ubuntu', sans-serif;
             margin-left: 20px;
         }
-        table{background-color: white;}
+        div{            
+            width: 50%;
+            text-align: center;
+            margin: auto;
+            padding: auto;
+
+        }
+        table{
+            background-color: white;
+            margin-left: auto;
+            margin-right: auto;
+        }
         h1 {
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-            color: white;
+            color: black;
             padding-bottom: 20px;
         }
         h3 {
             padding-top: 20px;
         }
+        p{
+            text-align: justify;
+            margin-right: 20px;
+        }
     </style>
   </head>
   <body>
+    <div>
     <h1><center>My Mini-project</center></h1>
-    <p>My first paragraph.</p>
-    <h3>Link to the dataset</h3>
-    <a href="https://ota.bodleian.ox.ac.uk/repository/xmlui/handle/20.500.12024/2539">BAWE Corpus</a> 
+    <h3>Summery</h3>
+    <p>For my mini-project, I am going to write a script that finds set phrases or N-Grams from a given dataset and displays their frequency. The dataset that I have chosen for my project is the <a href="https://ota.bodleian.ox.ac.uk/repository/xmlui/handle/20.500.12024/2539">BAWE Corpus</a>  which contains various written texts in academic English. The set phrases I’ll be using will be taken from the <a href="https://www.eapfoundation.com/vocab/academic/afl/">Academic Formulas List (AFL)</a> which is a list of the most common formulaic sequences in academic English. The research question for this project is: “Do the topmost common formulaic sequences in the AFL also appear in BAWE, and if so, what are their frequencies?”</p>
     <h3>Contact information</h3>
     <table width="500" border="1">
         <thead>
@@ -45,6 +60,7 @@
          
         </tbody>
     </table>
+    </div>
   </body>
 
 </html>
