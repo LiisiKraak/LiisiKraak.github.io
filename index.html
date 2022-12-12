@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="dracula.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <title>Liisi's Mini-project</title>
     <link rel="icon" type="image/png" href="icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
     <style>
         body{
             background:linear-gradient(to right, #FFCCCC 0, #FFCCCC 20%, #FFFFFF 20%, #FFFFFF 80%, #FFCCCC 80%, #FFCCCC 100%);
-            font-family: 'Ubuntu', sans-serif;
+            font-family: 'Ubuntu', sans-serif;  
             margin-left: 20px;
         }
-        div{            
+        .main{            
             width: 50%;
             text-align: center;
             margin: auto;
@@ -35,11 +37,75 @@
             text-align: justify;
             margin-right: 20px;
         }
+        button:hover{
+            filter: brightness(0.75);
+        }
+        #src{
+            text-align: justify;
+        }
+        button{
+            background-color: #FFCCCC;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .justify{
+            text-align: justify;
+        }
+        .center{
+            text-align: center;
+        }
+        .p1{
+            background-color: black;
+            color: white;
+            border: 2px solid black;
+        }
     </style>
   </head>
   <body>
-    <div>
+    <div id="main" class="main">
     <h1><center>My Mini-project</center></h1>
+    <nav>
+        <button onclick="home()">Home</button>
+        <button onclick="about()">About</button>
+        <button onclick="results()">Results</button>
+        <button onclick="problems()">Problems</button>
+        <button onclick="sourceCode()">Source Code</button>
+
+    </nav>
+    <div id="content">
+    <h3>Summary</h3>
+    <p>For my mini-project, I wrote a script that finds set phrases or n-grams from a given dataset and displays their frequency. The dataset that I chose for my project is the <a href="https://ota.bodleian.ox.ac.uk/repository/xmlui/handle/20.500.12024/2539">BAWE Corpus</a> which contains various written texts in academic English. The set phrases that were used for this project were taken from the <a href="https://www.eapfoundation.com/vocab/academic/afl/">Academic Formulas List (AFL)</a> which is a list of the most common formulaic sequences in academic English. The research questions for this project were: Do the top 10 most common formulaic sequences in the AFL also appear in BAWE, and if so, what are their frequencies? Based on the list, what are the top 10 most frequent formulaic sequences in BAWE? What are the top 10 most frequent 3-, 4- and 5-grams in BAWE?</p>
+    <h3>Contact information</h3>
+    <table width="500" border="1">
+        <thead>
+            <tr>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"| align="center">Liisi</td>
+                <td align="center">Kraak</td>
+                <td align="center">liisi.kraak@ut.ee</td>
+            </tr>
+         
+        </tbody>
+    </table>
+    </div>
+    </div>
+    <script>
+        body = document.getElementById("content")
+        function home() {
+            body.innerHTML = `
+            <div>
     <h3>Summary</h3>
     <p>For my mini-project, I am going to write a script that finds set phrases or N-Grams from a given dataset and displays their frequency. The dataset that I have chosen for my project is the <a href="https://ota.bodleian.ox.ac.uk/repository/xmlui/handle/20.500.12024/2539">BAWE Corpus</a>  which contains various written texts in academic English. The set phrases I’ll be using will be taken from the <a href="https://www.eapfoundation.com/vocab/academic/afl/">Academic Formulas List (AFL)</a> which is a list of the most common formulaic sequences in academic English. The research question for this project is: “Do the topmost common formulaic sequences in the AFL also appear in BAWE, and if so, what are their frequencies?”</p>
     <h3>Contact information</h3>
@@ -61,6 +127,385 @@
         </tbody>
     </table>
     </div>
-  </body>
 
+    
+            `
+        }
+        function problems() {
+            body.innerHTML = `
+            <h3>Problems</h3>
+            <p>1) Originally, the program included the comma as a part of the word it was attached to. For example, “on the other hand,”. This is incorrect because a comma is not a part of the word. Consequently, it also muddled the results because “on the other hand,” (with a comma) and “on the other hand” (without a comma) were treated as separate phrases. Thus, a line of code that removes commas throughout the whole dataset was implemented.</p>
+            <p><span class="p1">data = data.replace(",", "")</span></p>
+            <br>
+            <p>2) Some of the text files in the BAWE corpus were written in the mathematics field and thus, contained mathematical expressions that were displayed in the text as “FORMULA”. As sometimes these mathematical expressions appeared in a row, the program picked them up as a formulaic phrase (e.g. when searching for 4-grams, the program would display “formula formula formula formula” as one of the most frequent formulaic phrases).  However, as this is not an actual formulaic phrase, a line of code that ignores the sequence if it contains two or more “formula”-s in a row was implemented.</p>
+            <p><span class="p1">if "".join(grams).count("formula") > 2:</span></p>
+            <br>
+            <p>3) One of the issues was also speed. The chosen dataset contained a large number of files which the program had to go through one by one, thus hindering the speed it took to display the results. As this given project didn’t look at range (the number of different text files a given phrase appears in at least once), the dataset files were combined into a singular text file. This minimized the time it took the program to search for given phrases.</p>
+            <br>
+            `
+        }
+        function about() {
+            body.innerHTML = `
+            <h3>About</h3>
+            <h3 class="justify">What is formulaic language?</h3>
+            <p>Formulaic language is a research field that examines the usage of fixed or frequently occurring combinations of words. Over the years, formulaic language has been researched by scholars from various disciplines and thus, different terms have been coined to define the same phenomenon. This includes prefabs, chunks, bundles, collocations, fixed expressions, formulaic sequences, recurring utterances and so forth. This phenomenon has most thoroughly been studied regarding second- and foreign language acquisition as scholars believe that learning such phrases will greatly improve speaking and writing fluency.</p>
+            <h3 class="justify">BAWE – British Academic Written English</h3>
+            <p>BAWE is a corpus that is compiled from academic works written in various universities in the UK. It features text from a variety of disciplines (Arts and Humanities, Social Sciences, Life Sciences and Physical Sciences) and across multiple levels of study.</p>
+            <table width="500" border="1">
+        <thead>
+            <tr>
+                <th scope="col">Text files</th>
+                <th scope="col">Word count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"| align="center">2761</td>
+                <td align="center">6,987,574</td>
+            </tr>
+         
+        </tbody>
+    </table>
+    </div>
+            <h3 class="justify">AFL – Academic Formulas List</h3>
+            <p>The AFL is a list of the most common formulaic sequences in academic English. It consists of both written and spoken formulaic sequences. Learning these formulas could help non-native English speakers expand their academic vocabulary.</p>
+            <h3 class="justify">About the program</h3> 
+            <p>The program has three functions:</p>
+            <p>1) User input</p>
+            <p>This function allows the user to search for a specific phrase. The result will display the given phrase with its frequency within the given file(s).</p>
+            <p>2) List of phrases</p>
+            <p>This function uses the list of written formulaic phrases given in the AFL and searches for said phrases simultaneously within the given file(s) as well as displays their frequency.</p>
+            <p>3) N-grams</p>
+            <p>This function searches for n-grams based on the user input. First the user can choose the n-gram length (n = number of words in a sequence) and then the minimum frequency (the minimum number of times a phrase must occur).</p>
+            <br>
+            `
+        }
+        function results() {
+            body.innerHTML = `
+            <h3>Results</h3>
+            <h3>Top 10 most frequent sequences in the AFL compare to BAWE</h3>
+            <p class="center">The frequencies are dispayed per one million words.</p>
+            <table width="500" border="1">
+        <thead>
+            <tr>
+                <th scope="col">Formula</th>
+                <th scope="col">AFL</th>
+                <th scope="col">BAWE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"| align="center">on the other</td>
+                <td align="center">147</td>
+                <td align="center">151</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">the other hand</td>
+                <td align="center">120</td>
+                <td align="center">130</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">on the other hand</td>
+                <td align="center">119</td>
+                <td align="center">129</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">can be seen</td>
+                <td align="center">87</td>
+                <td align="center">186</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">it is possible</td>
+                <td align="center">83</td>
+                <td align="center">99</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">is likely to</td>
+                <td align="center">80</td>
+                <td align="center">6</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">it has been</td>
+                <td align="center">79</td>
+                <td align="center">125</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">related to the</td>
+                <td align="center">77</td>
+                <td align="center">49</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">it is important</td>
+                <td align="center">66</td>
+                <td align="center">118</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">as shown in</td>
+                <td align="center">66</td>
+                <td align="center">48</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <h3>Top 10 most frequent sequences in the AFL and in  BAWE</h3>
+    <p class="center">The frequencies are dispayed per one million words.</p>
+    <table width="500" border="1">
+        <thead>
+            <tr>
+                <th scope="col">Formula</th>
+                <th scope="col">AFL</th>
+                <th scope="col">BAWE</th>
+                <th scope="col">Formula</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"| align="center">on the other</td>
+                <td align="center">147</td>
+                <td align="center">186</td>
+                <td align="center">can be seen</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">the other hand</td>
+                <td align="center">120</td>
+                <td align="center">151</td>
+                <td align="center">on the other</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">on the other hand</td>
+                <td align="center">119</td>
+                <td align="center">130</td>
+                <td align="center">the other hand</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">can be seen</td>
+                <td align="center">87</td>
+                <td align="center">129</td>
+                <td align="center">on the other hand</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">it is possible</td>
+                <td align="center">83</td>
+                <td align="center">125</td>
+                <td align="center">it has been</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">is likely to</td>
+                <td align="center">80</td>
+                <td align="center">119</td>
+                <td align="center">be use to</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">it has been</td>
+                <td align="center">79</td>
+                <td align="center">118</td>
+                <td align="center">it is important</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">related to the</td>
+                <td align="center">77</td>
+                <td align="center">99</td>
+                <td align="center">it is possible</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">it is important</td>
+                <td align="center">66</td>
+                <td align="center">87</td>
+                <td align="center">it is important to</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">as shown in</td>
+                <td align="center">66</td>
+                <td align="center">85</td>
+                <td align="center">needs to be</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Top 10 most frequent 3-, 4- and 5-grams in BAWE</h3>
+    <p class="center">The n-grams are depicted with their raw frequencies.</p>
+    <table width="700" border="1">
+        <thead>
+            <tr>
+                <th scope="col">3-grams</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">4-grams</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">5-grams</th>
+                <th scope="col">Frequency</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"| align="center">in order to</td>
+                <td align="center">4012</td>
+                <td align="center">on the other hand</td>
+                <td align="center">853</td>
+                <td align="center">at the end of the</td>
+                <td align="center">270</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">as well as</td>
+                <td align="center">2428</td>
+                <td align="center">as a result of</td>
+                <td align="center">760</td>
+                <td align="center">it can be seen that</td>
+                <td align="center">232</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">due to the</td>
+                <td align="center">2395</td>
+                <td align="center">the end of the</td>
+                <td align="center">629</td>
+                <td align="center">as a result of the</td>
+                <td align="center">216</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">the use of</td>
+                <td align="center">2035</td>
+                <td align="center">in the case of</td>
+                <td align="center">604</td>
+                <td align="center">due to the fact that</td>
+                <td align="center">209</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">one of the</td>
+                <td align="center">1986</td>
+                <td align="center">it is important to</td>
+                <td align="center">574</td>
+                <td align="center">it could be argued that</td>
+                <td align="center">147</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">the fact that</td>
+                <td align="center">1868</td>
+                <td align="center">at the same time</td>
+                <td align="center">520</td>
+                <td align="center">this is due to the</td>
+                <td align="center">139</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">in terms of</td>
+                <td align="center">1739</td>
+                <td align="center">as well as the</td>
+                <td align="center">515</td>
+                <td align="center">in the case of the</td>
+                <td align="center">137</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">there is a</td>
+                <td align="center">1722</td>
+                <td align="center">in the from of</td>
+                <td align="center">492</td>
+                <td align="center">at the beginning of the</td>
+                <td align="center">129</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">as a result</td>
+                <td align="center">1329</td>
+                <td align="center">at the end of</td>
+                <td align="center">455</td>
+                <td align="center">on the other hand the</td>
+                <td align="center">119</td>
+            </tr>
+            <tr>
+                <td scope="row"| align="center">part of the</td>
+                <td align="center">1328</td>
+                <td align="center">the fact that the</td>
+                <td align="center">427</td>
+                <td align="center">it can be argued that</td>
+                <td align="center">117</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <br>
+            `
+        }
+        function sourceCode() {
+            body.innerHTML = `
+            <h3>Python</h3>
+            <div id="src">
+            <h3>miniproject.py</h3>
+            <pre><code  style="overflow-y: scroll; height:600px;" class="python">import os
+from nltk import ngrams
+from prettytable import PrettyTable
+
+directory = 'RAW'
+
+data = ""
+for filename in os.scandir(directory):
+    if filename.is_file():
+        file = open(filename, 'r', encoding="utf-8")
+        data += file.read().lower()
+        file.close()
+data = data.replace(",", "")
+
+print("Liisi's miniproject")
+def main_loop():
+    try: 
+        c = int(input("\\n1) User input\\n2) List of phrases\\n3) N-grams\\n4) Exit\\n\\nChoose: "))
+                
+        if c == 1:
+            pattern = str(input("Insert pattern: ")).lower()
+            print("\\n"+pattern+": "+str(data.count(pattern)))
+            main_loop()
+            
+        if c == 2: 
+            patterns = {}
+            f = open('written formulas.txt', 'r')
+            Lines = f.read().splitlines()
+            for line in Lines:
+                patterns.update({line:data.count(line)})
+            result = dict(sorted(patterns.items(), key=lambda elem: elem[1], reverse=True))
+            x = PrettyTable()
+            x.field_names = ["Formula", "Frequency"]
+            for k, v in result.items():
+                if v >= 0:
+                    x.add_row(["".join(k), str(v)])
+            print(x)
+            main_loop()
+
+        if c == 3:
+            n = int(input("N-gram length: "))
+            min = int(input("Minimum frequency: "))
+            print("")
+            ngram_dict = {}
+            for s in data.split(". "):
+                n_grams = ngrams(s.split(), n)
+                for grams in n_grams:
+                    if "".join(grams).count("formula") > 2:
+                        continue
+                    elif not grams in ngram_dict:
+                        ngram_dict[grams] = 1
+                    else:
+                        ngram_dict[grams] += 1
+            ngram_dict = dict(sorted(ngram_dict.items(), key=lambda elem: elem[1], reverse=True))
+            x = PrettyTable()
+            x.field_names = ["N-gram", "Frequency"]
+            for k, v in ngram_dict.items():
+                if v >= min:
+                    x.add_row([" ".join(k), str(v)])
+            print(x)
+            main_loop()
+
+        if c == 4:
+            exit()
+
+        else:
+            main_loop()
+    
+    except ValueError:
+        main_loop()
+
+main_loop()
+            </code></pre>
+            </div>
+            `
+            hljs.highlightAll();
+        }
+
+    </script>
+  </body>
 </html>
